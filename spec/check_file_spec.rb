@@ -18,10 +18,10 @@ end
 
 describe 'Check behavior' do
   before do
-    @classificator = VideoPreProcesor.new
+    @classificator = VideoPreProcessor.new
   end
 
-  it 'shoul check if video is loaded' do
+  it 'should check if video sample has correct format' do
     sample = @classificator.videos.sample
     sample["postId"].wont_be_empty
     sample["wordList"].wont_be_empty
