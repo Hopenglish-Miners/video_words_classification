@@ -35,7 +35,8 @@ describe 'Check behavior' do
   # This vocabulary has 6 categories
   # cat: [A1,A2,B1,B2,C1,C2]
   it 'should check that vocabulary2 array has also size 6' do
-    #vocabulary = @classificator.vocabulary
+    vocabulary = @classificator.vocabulary2
+    vocabulary.size == 6
   end
 
   it 'should return each video with correct format' do
