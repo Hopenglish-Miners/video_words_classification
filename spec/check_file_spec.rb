@@ -27,9 +27,15 @@ describe 'Check behavior' do
     sample["wordList"].wont_be_empty
   end
 
-  it 'should check that vocaubulary array have size 6' do
-    vocabulary = @classificator.vocabulary
+  it 'should check that vocaubulary1 array have size 6' do
+    vocabulary = @classificator.vocabulary1
     vocabulary.size == 6
+  end
+
+  # This vocabulary has 6 categories
+  # cat: [A1,A2,B1,B2,C1,C2]
+  it 'should check that vocabulary2 array has also size 6' do
+    #vocabulary = @classificator.vocabulary
   end
 
   it 'should return each video with correct format' do

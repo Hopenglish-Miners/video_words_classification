@@ -3,7 +3,7 @@ require 'json'
 class VideoPreProcessor
   def initialize
     @videos = load_videos
-    @vocabulary = parse_vocabulary
+    @vocabulary1 = parse_vocabulary1
   end
 
   def videos
@@ -14,11 +14,11 @@ class VideoPreProcessor
     end
   end
 
-  def vocabulary
-    if @vocabulary != nil
-      @vocabulary
+  def vocabulary1
+    if @vocabulary1 != nil
+      @vocabulary1
     else
-      parse_vocabulary
+      parse_vocabulary1
     end
   end
 
@@ -37,7 +37,7 @@ class VideoPreProcessor
       result["l5"] = 0
       result["l6"] = 0
       video["wordList"].each do |word|
-        @vocabulary.each_with_index do |level, index|
+        @vocabulary1.each_with_index do |level, index|
           if level.include? word
             total_found = total_found + 1
             result["l#{index + 1}"] = result["l#{index + 1}"] + 1
@@ -67,7 +67,7 @@ class VideoPreProcessor
 
   # Conver vocublary in a array of array of words
   # THe index +1 represent the level
-  def parse_vocabulary
+  def parse_vocabulary1
     json = File.read(VOCABULARY_FILE)
     object = JSON.parse(json)
     result = []
