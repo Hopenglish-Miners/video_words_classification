@@ -35,7 +35,7 @@ describe 'Check behavior' do
   it 'should return each video with correct format' do
     sample = @classificator.compare_videos_with_dictionary.sample
     (1..6).each do |i|
-      sample["l#{i}"].wont_be_empty
+      sample["l#{i}"].wont_be_nil
     end
   end
 end
