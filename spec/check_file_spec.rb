@@ -45,4 +45,17 @@ describe 'Check behavior' do
       sample["l#{i}"].wont_be_nil
     end
   end
+
+  it '[vocabulary2] should return each video with correct format' do
+    array = @classificator.compare_videos_with_dictionary2
+    array.each do |video|
+      video["postId"].wont_be_nil
+      video["a1"] >= 0
+      video["a2"] >= 0
+      video["b1"] >= 0
+      video["b2"] >= 0
+      video["c1"] >= 0
+      video["c2"] >= 0
+    end
+  end
 end
