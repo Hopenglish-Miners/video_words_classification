@@ -29,8 +29,8 @@ describe 'Check behavior' do
 
   it 'should check if the big video dataset has correct format after parsed' do
     sample = @classificator.videos_full.sample
-    sample["postId"].wont_be_empty
-    sample["wordList"].wont_be_empty
+    sample["postId"].wont_be_nil
+    sample["wordList"].wont_be_nil
   end
 
   it 'should check that vocaubulary1 array have size 6' do
@@ -45,23 +45,28 @@ describe 'Check behavior' do
     vocabulary.size == 6
   end
 
-  it 'should return each video with correct format' do
-    sample = @classificator.compare_videos_with_dictionary.sample
-    (1..6).each do |i|
-      sample["l#{i}"].wont_be_nil
+  describe "Using small video dataset" do
+    it '[dictionary1]-should return each video with correct format' do
+      videos = @classificator.videos
+      sample = @classificator.compare_videos_with_dictionary(videos).sample
+      (1..6).each do |i|
+        sample["l#{i}"].wont_be_nil
+      end
+    end
+
+    it '[dictionary2] should return each video with correct format' do
+      videos = @classificator.videos
+      array = @classificator.compare_videos_with_dictionary2(videos)
+      array.each do |video|
+        video["postId"].wont_be_nil
+        video["a1"].wont_be_nil
+        video["a2"].wont_be_nil
+        video["b1"].wont_be_nil
+        video["b2"].wont_be_nil
+        video["c1"].wont_be_nil
+        video["c2"].wont_be_nil
+      end
     end
   end
 
-  it '[vocabulary2] should return each video with correct format' do
-    array = @classificator.compare_videos_with_dictionary2
-    array.each do |video|
-      video["postId"].wont_be_nil
-      video["a1"] >= 0
-      video["a2"] >= 0
-      video["b1"] >= 0
-      video["b2"] >= 0
-      video["c1"] >= 0
-      video["c2"] >= 0
-    end
-  end
 end

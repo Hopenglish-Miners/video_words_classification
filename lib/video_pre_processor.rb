@@ -3,6 +3,7 @@ require 'json'
 class VideoPreProcessor
   def initialize
     @videos = load_videos
+    @videos2 = load_videos2
     @vocabulary1 = parse_vocabulary1
     @vocabulary2 = parse_vocabulary2
   end
@@ -12,6 +13,14 @@ class VideoPreProcessor
       @videos
     else
       load_videos
+    end
+  end
+
+  def videos_full
+    if @videos2 != nil
+      @videos2
+    else
+      load_videos2
     end
   end
 
@@ -32,10 +41,10 @@ class VideoPreProcessor
     end
   end
 
-  def compare_videos_with_dictionary
+  def compare_videos_with_dictionary(videos)
     array = []
 
-    @videos.each do |video|
+    videos.each do |video|
       total_found = 0
       total_process = 0
       result = {}
@@ -63,10 +72,10 @@ class VideoPreProcessor
     array
   end
 
-  def compare_videos_with_dictionary2
+  def compare_videos_with_dictionary2(videos)
     array = []
     index_to_level = ["a1","a2","b1","b2","c1","c2"]
-    @videos.each do |video|
+    videos.each do |video|
       total_found = 0
       total_process = 0
       result = {}
@@ -95,12 +104,12 @@ class VideoPreProcessor
   end
 
   def run_pre_processor
-    result = compare_videos_with_dictionary
+    result = compare_videos_with_dictionary(@videos)
     create_csv result
   end
 
   def run_pre_processor2
-    result = compare_videos_with_dictionary2
+    result = compare_videos_with_dictionary2(@videos)
     create_csv2 result
   end
 
@@ -109,6 +118,15 @@ class VideoPreProcessor
     json = File.read(VIDEOS_FILE)
     array = JSON.parse(json)
     array
+  end
+
+  # This tries to load the video file extracted
+  # after scrapping websit to get more information about videos
+  def load_videos2
+    json = File.read(VIDEOS2_FILE)
+    array = JSON.parse(json)
+    array["videos"].map! { |v| {"postId" => v["postId"], "wordList" => v["wordList"]}}
+    array["videos"]
   end
 
   # Conver vocublary in a array of array of words
