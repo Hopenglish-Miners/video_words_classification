@@ -2,9 +2,9 @@ require_relative 'video_pre_processor.rb'
 
 # CONSTANT
 VIDEOS_FILE = 'data/videoData_vs_WordList.json'
+VIDEOS2_FILE = 'data/video_tags.json'
 VOCABULARY_FILE = 'data/vocabulary.json'
 VOCABULARY2_FILE = 'data/WordList-level1-6.csv'
-
 
 # test
 test = VideoPreProcessor.new
