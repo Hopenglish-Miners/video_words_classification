@@ -27,6 +27,12 @@ describe 'Check behavior' do
     sample["wordList"].wont_be_empty
   end
 
+  it 'should check if the big video dataset has correct format after parsed' do
+    sample = @classificator.videos_full.sample
+    sample["postId"].wont_be_empty
+    sample["wordList"].wont_be_empty
+  end
+
   it 'should check that vocaubulary1 array have size 6' do
     vocabulary = @classificator.vocabulary1
     vocabulary.size == 6
