@@ -69,4 +69,28 @@ describe 'Check behavior' do
     end
   end
 
+  describe "Using large video dataset" do
+    it '[dictionary1]-should return each video with correct format' do
+      videos = @classificator.videos_full
+      sample = @classificator.compare_videos_with_dictionary(videos).sample
+      (1..6).each do |i|
+        sample["l#{i}"].wont_be_nil
+      end
+    end
+
+    it '[dictionary2] should return each video with correct format' do
+      videos = @classificator.videos_full
+      array = @classificator.compare_videos_with_dictionary2(videos)
+      array.each do |video|
+        video["postId"].wont_be_nil
+        video["a1"].wont_be_nil
+        video["a2"].wont_be_nil
+        video["b1"].wont_be_nil
+        video["b2"].wont_be_nil
+        video["c1"].wont_be_nil
+        video["c2"].wont_be_nil
+      end
+    end
+  end
+
 end

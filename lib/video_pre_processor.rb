@@ -43,7 +43,6 @@ class VideoPreProcessor
 
   def compare_videos_with_dictionary(videos)
     array = []
-
     videos.each do |video|
       total_found = 0
       total_process = 0
@@ -105,12 +104,24 @@ class VideoPreProcessor
 
   def run_pre_processor
     result = compare_videos_with_dictionary(@videos)
-    create_csv result
+    create_csv "out/videos_compare_with_dictionary.csv",result
   end
 
   def run_pre_processor2
+    videos = videos
     result = compare_videos_with_dictionary2(@videos)
-    create_csv2 result
+    create_csv2 "out/videos_compare_with_dictionary2.csv",result
+  end
+
+  def run_pre_processor_full
+    videos = videos_full
+    result = compare_videos_with_dictionary(@videos2)
+    create_csv "out/full_videos_compare_with_dictionary.csv",result
+  end
+
+  def run_pre_processor_full2
+    result = compare_videos_with_dictionary2(@videos2)
+    create_csv2 "out/full_videos_compare_with_dictionary2.csv",result
   end
 
   private
@@ -156,16 +167,16 @@ class VideoPreProcessor
     mapping.values
   end
 
-  def create_csv(pp_result)
-    CSV.open("videos_compare_with_dictionary.csv", "wb") do |csv|
+  def create_csv(name,pp_result)
+    CSV.open(name, "wb") do |csv|
       csv << ["postId", "l1", "l2", "l3","l4","l5","l6","processed","found","missed"]
       pp_result.each { |result|
         csv << result.values
       }
     end
   end
-  def create_csv2(pp_result)
-    CSV.open("videos_compare_with_dictionary2.csv", "wb") do |csv|
+  def create_csv2(name,pp_result)
+    CSV.open(name, "wb") do |csv|
       csv << ["postId", "a1", "a2", "b1","b2","c1","c2","processed","found","missed"]
       pp_result.each { |result|
         csv << result.values

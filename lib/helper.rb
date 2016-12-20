@@ -11,3 +11,5 @@ test = VideoPreProcessor.new
 #puts test.compare_videos_with_dictionary
 test.run_pre_processor
 test.run_pre_processor2
+test.run_pre_processor_full
+test.run_pre_processor_full2
